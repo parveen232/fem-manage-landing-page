@@ -122,37 +122,24 @@ svg {
     }
 }
 
-.container {
-    --max-width: 1110px;
-    --padding: 1rem;
-    /* 1rem here = 16px */
-
-    /* below... if only.... ----, 100%), on smaller screen content stuck to side of screen */
-    width: min(var(--max-width), 100% - (var(--padding) * 2));
-    /* ----, 100% - (var(--padding) * 2)) solve the above mentioned problem */
-    margin-inline: auto;
-    /* margin-inline for both left and right margin....., centering it*/
-}
-
-.even-columns {
-    display: grid;
-    gap: 1rem;
-}
-
-@media (min-width: 50em) {
-    .even-columns {
-        /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout#auto-placement_by_column */
-        grid-auto-flow: column;
-        grid-auto-columns: 1fr;
-    }
-}
-
 /* general styling */
 
 body {
     font-size: var(--fs-body);
     font-family: var(--ff-body);
     color: var(--clr-primary-400);
+}
+
+/* ch is also very useful for correctly defining the text width of a paragraph */
+/* https://stackoverflow.com/questions/48649169/what-is-difference-between-css-em-and-ch-units */
+
+p:not([class]) {
+    opacity: 0.7;
+    max-width: 32ch;
+}
+
+p[data-width="wide"] {
+    max-width: 42ch;
 }
 
 /* button */
@@ -221,7 +208,7 @@ body {
 .nav-list a:hover,
 .nav-list a:focus {
     color: var(--clr-accent-400);
-    outline: 0;
+    outline: none;
 }
 
 @media (max-width: 50em) {
@@ -272,11 +259,6 @@ body {
     }
 }
 
-/* .opened {
-    display: block;
-    position: fixed;
-} */
-
 /* Utility classes */
 .visually-hidden {
     position: absolute;
@@ -289,6 +271,39 @@ body {
     clip: rect(0, 0, 0, 0) !important;
     white-space: nowrap !important;
     border: 0 !important;
+}
+
+.container {
+    --max-width: 1110px;
+    --padding: 1rem;
+    /* 1rem here = 16px */
+
+    /* below... if only.... ----, 100%), on smaller screen content stuck to side of screen */
+    width: min(var(--max-width), 100% - (var(--padding) * 2));
+    /* ----, 100% - (var(--padding) * 2)) solve the above mentioned problem */
+    margin-inline: auto;
+    /* margin-inline for both left and right margin....., centering it*/
+}
+
+/* :where -> for 0 specificity */
+/* --flow-spacer set using inline style in html */
+
+:where(.flow :not(:first-child)) {
+    /* outline: 4px solid purple; */
+    margin-top: var(--flow-spacer, 3em);
+}
+
+.even-columns {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 50em) {
+    .even-columns {
+        /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Auto-placement_in_CSS_Grid_Layout#auto-placement_by_column */
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+    }
 }
 
 .text-primary-400 {
