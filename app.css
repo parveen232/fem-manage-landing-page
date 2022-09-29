@@ -259,6 +259,34 @@ p[data-width="wide"] {
     }
 }
 
+/* cta */
+
+.cta {
+    position: relative;
+    isolation: isolate;
+    text-align: center;
+}
+
+@media (min-width: 50em) {
+    .cta {
+        text-align: left;
+    }
+}
+
+.cta::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image:
+        url('images/bg-tablet-pattern.svg'),
+        url('images/bg-tablet-pattern.svg');
+    /* background: red; */
+    background-position: -15rem -5rem, 80rem -41rem;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+}
+
 /* Utility classes */
 .visually-hidden {
     position: absolute;
@@ -285,14 +313,6 @@ p[data-width="wide"] {
     /* margin-inline for both left and right margin....., centering it*/
 }
 
-/* :where -> for 0 specificity */
-/* --flow-spacer set using inline style in html */
-
-:where(.flow :not(:first-child)) {
-    /* outline: 4px solid purple; */
-    margin-top: var(--flow-spacer, 3em);
-}
-
 .even-columns {
     display: grid;
     gap: 1rem;
@@ -304,6 +324,30 @@ p[data-width="wide"] {
         grid-auto-flow: column;
         grid-auto-columns: 1fr;
     }
+}
+
+.vertical-align-center {
+    align-items: center;
+}
+
+/* ==== */
+.justify-self-end {
+    justify-self: end;
+}
+/* ==== */
+
+@media (min-width: 50em) {
+    .justify-self-end-medium {
+        justify-self: end;
+    }
+}
+
+/* :where -> for 0 specificity */
+/* --flow-spacer set using inline style in html */
+
+:where(.flow :not(:first-child)) {
+    /* outline: 4px solid purple; */
+    margin-top: var(--flow-spacer, 3em);
 }
 
 .text-primary-400 {
