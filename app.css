@@ -272,10 +272,10 @@ p[data-width="wide"] {
 .primary-footer-wrapper {
     display: grid;
     gap: var(--size-700);
-    grid-template-areas: 
-    'form'
-    'nav'
-    'logo-social';
+    grid-template-areas:
+        'form'
+        'nav'
+        'logo-social';
 }
 
 .primary-footer-logo-social {
@@ -293,7 +293,7 @@ p[data-width="wide"] {
 
 .primary-footer-form {
     grid-area: form;
-    
+
     display: grid;
     align-content: space-between;
 }
@@ -323,7 +323,7 @@ input:where([type="text"], [type="email"]) {
 }
 
 @media (max-width: 50em) {
-    .primary-footer-wrapper > * {
+    .primary-footer-wrapper>* {
         /* outline: 2px solid red; */
         margin-inline: auto;
     }
@@ -368,6 +368,7 @@ input:where([type="text"], [type="email"]) {
     .social-list {
         gap: var(--size-300);
     }
+
     .social-icon {
         width: var(--size-500);
     }
@@ -401,6 +402,75 @@ input:where([type="text"], [type="email"]) {
     opacity: 0.1;
 }
 
+/* numbered items */
+
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/counters */
+.numbered-items {
+    counter-reset: count;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.numbered-items li {
+    counter-increment: count;
+}
+
+.numbered-items div {
+    display: grid;
+    position: relative;
+    align-items: center;
+    column-gap: var(--size-300);
+    grid-template-columns: min-content 1fr;
+}
+
+.numbered-items__title {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    line-height: 1;
+}
+
+.numbered-items__body {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 30em) {
+    .numbered-items__body {
+        grid-column: 2 / -1;
+    }
+}
+
+.numbered-items div::before,
+.numbered-items div::after {
+    height: 40px;
+}
+
+.numbered-items div::before {
+    content: "0" counter(count);
+    display: flex;
+    align-items: center;
+    color: var(--clr-neutral-100);
+    font-weight: var(--fw-bold);
+    background-color: var(--clr-accent-400);
+    padding: 0 var(--size-500);
+    border-radius: 100vw;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+}
+
+@media (max-width: 30em) {
+    .numbered-items div::after {
+        --bg: var(--clr-accent-100);
+        content: "";
+        display: block;
+        z-index: -1;
+        border-radius: 100vw 0 0 100vw;
+        grid-column: 1 / -1;
+        grid-row: 1 / 2;
+        box-shadow: 5em 0 0 var(--bg);
+        background: var(--bg);
+    }
+}
+
 /* Utility classes */
 .visually-hidden {
     position: absolute;
@@ -417,11 +487,11 @@ input:where([type="text"], [type="email"]) {
 
 .container {
     --max-width: 1110px;
-    --padding: 1rem;
+    --container-padding: 1rem;
     /* 1rem here = 16px */
 
     /* below... if only.... ----, 100%), on smaller screen content stuck to side of screen */
-    width: min(var(--max-width), 100% - (var(--padding) * 2));
+    width: min(var(--max-width), 100% - (var(--container-padding) * 2));
     /* ----, 100% - (var(--padding) * 2)) solve the above mentioned problem */
     margin-inline: auto;
     /* margin-inline for both left and right margin....., centering it*/
@@ -448,6 +518,7 @@ input:where([type="text"], [type="email"]) {
 .justify-self-end {
     justify-self: end;
 }
+
 /* ==== */
 
 @media (min-width: 50em) {
@@ -462,6 +533,24 @@ input:where([type="text"], [type="email"]) {
 :where(.flow :not(:first-child)) {
     /* outline: 4px solid purple; */
     margin-top: var(--flow-spacer, 3em);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center p {
+    margin-inline: auto;
+}
+
+@media (max-width: 50em) {
+    .text-center-small-only {
+        text-align: center;
+    }
+
+    .text-center-small-only p {
+        margin-inline: auto;
+    }
 }
 
 .text-primary-400 {
@@ -549,6 +638,10 @@ input:where([type="text"], [type="email"]) {
 
 .padding-block-700 {
     padding-block: var(--size-700);
+}
+
+.margin-bottom-700 {
+    margin-block-end: var(--size-700);
 }
 
 .display-small-none {
